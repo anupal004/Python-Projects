@@ -4,7 +4,7 @@ import PySimpleGUI as gui
 label = gui.Text("Enter a task")
 input_box = gui.InputText(tooltip='Enter the task', key='Task')
 add_button = gui.Button("Add")
-my_tasks = gui.Listbox(values=todofunctions.get_tasks(), key='Tasks', enable_events=True, size=[50, 10])
+my_tasks = gui.Listbox(values=todofunctions.get_tasks(), key='Tasks', enable_events=True, size=[40, 10])
 edit_button = gui.Button("Edit")
 
 window = gui.Window("MY TASKS", layout=[[label, input_box, add_button], [my_tasks, edit_button]],
