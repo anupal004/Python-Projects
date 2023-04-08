@@ -4,10 +4,14 @@ import PySimpleGUI as gui
 label = gui.Text("Enter a task")
 input_box = gui.InputText(tooltip='Enter the task', key='Task')
 add_button = gui.Button("Add")
-my_tasks = gui.Listbox(values=todofunctions.get_tasks(), key='Tasks', enable_events=True, size=[40, 10])
+my_tasks = gui.Listbox(values=todofunctions.get_tasks(), key='Tasks', enable_events=True, size=[55, 10])
 edit_button = gui.Button("Edit")
+complete_button = gui.Button("Complete")
+exit_button = gui.Button("Exit")
 
-window = gui.Window("MY TASKS", layout=[[label, input_box, add_button], [my_tasks, edit_button]],
+window = gui.Window("MY TASKS", layout=[[label, input_box, add_button],
+                                        [my_tasks, edit_button, complete_button],
+                                        [exit_button]],
                     font=('Times New Roman', 14))
 # each list in the layout argument represents a row so in the above argument it will be a single row since it's
 # a single list
@@ -33,6 +37,15 @@ while True:
             tasks[index] = new_task
             todofunctions.write_tasks(tasks)
             window['Tasks'].update(values=tasks)
+        case "Complete":
+            task_to_complete = values['Tasks'][0]
+            tasks = todofunctions.get_tasks()
+            tasks.remove(task_to_complete)
+            todofunctions.write_tasks(tasks)
+            window['Tasks'].update(values=tasks)
+            window['Task'].update(value="")
+        case "Exit":
+            break
         case "Tasks":
             window['Task'].update(value=values['Tasks'][0])
         case gui.WIN_CLOSED:
