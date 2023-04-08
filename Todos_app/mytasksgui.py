@@ -1,6 +1,10 @@
+import time
 import todofunctions
 import PySimpleGUI as gui
 
+gui.theme("LightPurple")
+
+clock = gui.Text('', key='clock')
 label = gui.Text("Enter a task")
 input_box = gui.InputText(tooltip='Enter the task', key='Task')
 add_button = gui.Button("Add")
@@ -9,7 +13,8 @@ edit_button = gui.Button("Edit")
 complete_button = gui.Button("Complete")
 exit_button = gui.Button("Exit")
 
-window = gui.Window("MY TASKS", layout=[[label, input_box, add_button],
+window = gui.Window("MY TASKS", layout=[[clock],
+                                        [label, input_box, add_button],
                                         [my_tasks, edit_button, complete_button],
                                         [exit_button]],
                     font=('Times New Roman', 14))
@@ -17,10 +22,8 @@ window = gui.Window("MY TASKS", layout=[[label, input_box, add_button],
 # a single list
 
 while True:
-    event, values = window.read()
-    print("user_action:", event)
-    print(values['Task'])
-    print(values['Tasks'])
+    event, values = window.read(timeout=200)
+    window["clock"].update(time.strftime("%d-%m-%Y, %H:%M:%S"))
     match event:
         case "Add":
             tasks = todofunctions.get_tasks()
@@ -29,21 +32,27 @@ while True:
             todofunctions.write_tasks(tasks)
             window['Tasks'].update(values=tasks)
         case "Edit":
-            task_to_edit = values['Tasks'][0]
-            new_task = values['Task'] + '\n'
+            try:
+                task_to_edit = values['Tasks'][0]
+                new_task = values['Task'] + '\n'
 
-            tasks = todofunctions.get_tasks()
-            index = tasks.index(task_to_edit)
-            tasks[index] = new_task
-            todofunctions.write_tasks(tasks)
-            window['Tasks'].update(values=tasks)
+                tasks = todofunctions.get_tasks()
+                index = tasks.index(task_to_edit)
+                tasks[index] = new_task
+                todofunctions.write_tasks(tasks)
+                window['Tasks'].update(values=tasks)
+            except IndexError:
+                gui.popup("Please select a task to edit.", font=("Lato", 14))
         case "Complete":
-            task_to_complete = values['Tasks'][0]
-            tasks = todofunctions.get_tasks()
-            tasks.remove(task_to_complete)
-            todofunctions.write_tasks(tasks)
-            window['Tasks'].update(values=tasks)
-            window['Task'].update(value="")
+            try:
+                task_to_complete = values['Tasks'][0]
+                tasks = todofunctions.get_tasks()
+                tasks.remove(task_to_complete)
+                todofunctions.write_tasks(tasks)
+                window['Tasks'].update(values=tasks)
+                window['Task'].update(value="")
+            except IndexError:
+                gui.popup("Please select a task to remove.", font=("Lato", 14))
         case "Exit":
             break
         case "Tasks":
