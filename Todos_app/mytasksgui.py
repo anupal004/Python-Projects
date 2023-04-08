@@ -7,10 +7,10 @@ gui.theme("LightPurple")
 clock = gui.Text('', key='clock')
 label = gui.Text("Enter a task")
 input_box = gui.InputText(tooltip='Enter the task', key='Task')
-add_button = gui.Button("Add")
+add_button = gui.Button(image_source="add.png", tooltip="Add task", key="Add")
 my_tasks = gui.Listbox(values=todofunctions.get_tasks(), key='Tasks', enable_events=True, size=[55, 10])
-edit_button = gui.Button("Edit")
-complete_button = gui.Button("Complete")
+edit_button = gui.Button(image_source="edit.png", tooltip="Edit task", key="Edit")
+complete_button = gui.Button(image_source="complete.png", tooltip="Complete task", key="Complete")
 exit_button = gui.Button("Exit")
 
 window = gui.Window("MY TASKS", layout=[[clock],
