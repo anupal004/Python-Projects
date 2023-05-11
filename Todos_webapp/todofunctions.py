@@ -1,4 +1,4 @@
-FILEPATH = "D:/Python Projects/Todos_webapp/tasks.txt"
+FILEPATH = "Todos_webapp/tasks.txt"
 
 
 def get_tasks(filename=FILEPATH):
