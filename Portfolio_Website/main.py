@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 st.set_page_config(layout="wide")
 # this method makes the browser page wide, and we can also write "centered" to make center alignment
@@ -24,3 +25,16 @@ I have a systematic and well planned proposition in every job that I undertake. 
 Python Programmer.""")
 
 st.write("""Below you can find some of the Python Projects I have built so far!""")
+
+col4, col5 = st.columns(2)
+
+df = pd.read_csv("Portfolio_Website/data.csv", sep=";")
+# sep is used to separate each column in the csv file
+
+with col4:
+    for index, row in df[:10].iterrows():
+        st.header(row["title"])
+
+with col5:
+    for index, row in df[10:].iterrows():
+        st.header(row["title"])
