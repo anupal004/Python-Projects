@@ -20,4 +20,7 @@ st.markdown("<h1 style='text-align: center; color: grey;'>Anupal Deuri Bharali</
 st.info("""I am an Electronics and Telecommunication Engineering undergraduate, from Assam Engineering College situated 
 in Guwahati, Assam. I am particularly fascinated with
 Science and Technology and I am also interested in designing, coding, and making digital illustrations in my free time. 
-I have a systematic and well planned proposition in every job that I undertake. This portfolio showcases my work as an Python Programmer.""")
+I have a systematic and well planned proposition in every job that I undertake. This portfolio showcases my work as an 
+Python Programmer.""")
+
+st.write("""Below you can find some of the Python Projects I have built so far!""")
