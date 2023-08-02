@@ -26,7 +26,8 @@ Python Programmer.""")
 
 st.write("""Below you can find some of the Python Projects I have built so far!""")
 
-col4, col5 = st.columns(2)
+col4, empty_col, col5 = st.columns([1.5, 0.5, 1.5])
+# the list in the method indicates the size of each column, i.e, col4 is 3 times larger than the middle column
 
 df = pd.read_csv("Portfolio_Website/data.csv", sep=";")
 # sep is used to separate each column in the csv file
@@ -34,7 +35,13 @@ df = pd.read_csv("Portfolio_Website/data.csv", sep=";")
 with col4:
     for index, row in df[:10].iterrows():
         st.header(row["title"])
+        st.write(row["description"])
+        st.image("Portfolio_Website/images/" + row["image"])
+        st.write(f"[Source Code]({row['url']})")
 
 with col5:
     for index, row in df[10:].iterrows():
         st.header(row["title"])
+        st.write(row["description"])
+        st.image("Portfolio_Website/images/" + row["image"])
+        st.write(f"[Source Code]({row['url']})")
