@@ -10,7 +10,7 @@ with col1:
     st.write(' ')
 
 with col2:
-    st.image("Portfolio_Website/images/profile.png")
+    st.image("Portfolio_Website/images/profile_photo.png")
 
 with col3:
     st.write(' ')
